@@ -1,0 +1,2 @@
+/admin   /admin/   200
+/admin/*   /admin/:splat   200

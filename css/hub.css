@@ -1,0 +1,307 @@
+/* ===== Hub-specific styles ===== */
+
+.hub-hero {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark)), url('https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=1600&q=80') center/cover no-repeat;
+  background-blend-mode: overlay;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--primary-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 18px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  animation: heroText 0.8s ease 0.1s both;
+}
+
+.hub-hero .hero-content h1 {
+  font-size: 3.8rem;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  .hub-hero .hero-content h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .hub-hero .hero-content h1 {
+    font-size: 1.8rem;
+  }
+}
+
+/* ===== Service Cards with Links ===== */
+.service-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 15px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.service-link:hover {
+  gap: 12px;
+  color: var(--accent-dark);
+}
+
+.service-link i {
+  font-size: 0.85rem !important;
+  margin-bottom: 0 !important;
+  transition: var(--transition);
+}
+
+.service-link:hover i {
+  transform: translateX(4px);
+}
+
+/* ===== Transport & Cargas sections ===== */
+.transport,
+.store {
+  padding: 80px 0;
+}
+
+/* ===== Store section ===== */
+.store {
+  background: linear-gradient(135deg, #04351E, #010101);
+  color: var(--white);
+  text-align: center;
+}
+
+.store-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.store-content i {
+  font-size: 4rem;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.store-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+}
+
+.store-content p {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  margin-bottom: 25px;
+}
+
+.store-progress {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.store-progress-bar {
+  width: 200px;
+  height: 6px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.store-progress-fill {
+  width: 35%;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 10px;
+  animation: progressPulse 2s ease infinite;
+}
+
+@keyframes progressPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.store-progress span {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.store-notify {
+  font-size: 0.95rem !important;
+}
+
+.store-form {
+  display: flex;
+  justify-content: center;
+}
+
+.store-form-group {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 450px;
+}
+
+.store-form-group input {
+  flex: 1;
+  padding: 14px 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  transition: var(--transition);
+}
+
+.store-form-group input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.store-form-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.15);
+}
+
+.store-form-group .btn {
+  padding: 14px 24px;
+  white-space: nowrap;
+}
+
+.store-thanks {
+  display: none;
+  color: var(--secondary);
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* ===== Contact section refinements ===== */
+.contact {
+  padding: 80px 0;
+}
+
+.contact-info a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.contact-info a:hover {
+  color: var(--accent);
+}
+
+/* ===================================================================
+   NOTA: Los bloques "html.dark" fueron eliminados de hub.css.
+   El sitio ahora usa SIEMPRE el tema oscuro, así que esas reglas
+   ya no son necesarias. Los estilos base ya son los oscuros.
+   =================================================================== */
+
+/* ===== Toast overrides ===== */
+.toast-success {
+  border-left: 4px solid var(--secondary);
+}
+
+/* ===== Smooth anchor offset ===== */
+html {
+  scroll-padding-top: 80px;
+}
+
+/* ===== Store page (tienda/) ===== */
+.store-page {
+  padding: 80px 0;
+}
+
+.store-page-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.store-page-content i {
+  font-size: 4rem;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.store-page-content h2 {
+  font-size: 2rem;
+  color: var(--text);
+  margin-bottom: 15px;
+}
+
+.store-page-content p {
+  color: var(--text-light);
+  margin-bottom: 25px;
+  font-size: 1.05rem;
+}
+
+.store-page .store-progress-bar {
+  background: rgba(255,255,255,0.15);
+}
+
+.store-page .store-progress span {
+  color: var(--text-light);
+}
+
+.store-page .store-form-group input {
+  border-color: rgba(255,255,255,0.2);
+  color: var(--white);
+  background: rgba(255,255,255,0.08);
+}
+
+.store-page .store-form-group input:focus {
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.12);
+}
+
+/* Las reglas html.dark para .store-page fueron eliminadas.
+   Ahora el tema oscuro es el default. */
+
+.btn-back {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  transition: var(--transition);
+  background: transparent;
+}
+
+.btn-back:hover {
+  background: var(--accent);
+  color: var(--white);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .store-form-group {
+    flex-direction: column;
+  }
+  
+  .store-form-group .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .store-progress {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://formspree.io https://worldtimeapi.org; frame-ancestors 'none'; form-action 'self' https://formspree.io">
+  <title>Contacto | Tropicales JW - Transporte de Carga en Cuba</title>
+  <meta name="description" content="Solicita tu cotización de transporte de carga en Cuba. Tropicales JW te ofrece servicio rápido y seguro a toda la isla.">
+  <meta name="keywords" content="cotizar transporte Cuba, contacto Tropicales JW, solicitar flete Cuba, transporte carga La Habana">
+  <meta property="og:title" content="Contacto | Tropicales JW - Transporte de Carga en Cuba">
+  <meta property="og:description" content="Solicita tu cotización de transporte de carga en Cuba. Tropicales JW te ofrece servicio rápido y seguro.">
+  <meta property="og:url" content="/transporte/pages/contacto.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/transporte/img/logo.png">
+  <meta property="og:site_name" content="Tropicales JW">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="/transporte/pages/contacto.html">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <img src="../img/logo.png" alt="Tropicales JW - Transporte de carga en Cuba" class="logo-img">
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="nav" id="nav">
+        <!-- dark-toggle eliminado: solo tema oscuro fijo -->
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="flota.html">Flota</a></li>
+          <li><a href="../rastreo.html">Rastrear</a></li>
+          <li><a href="contacto.html" class="active">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Contacto</h1>
+      <p>Estamos listos para ayudarte. Cuéntanos qué necesitas.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info animate-left">
+          <h3>Ponte en contacto con nosotros</h3>
+          <p style="color: var(--text-light); margin-bottom: 30px;">Estamos disponibles todos los días para atenderte. Respondemos cotizaciones en menos de 2 horas.</p>
+
+          <div class="contact-info-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h4>Teléfono</h4>
+              <p>+53 53216445</p>
+              <p>+53 51457401</p>
+            </div>
+          </div>
+
+
+          <div class="contact-info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h4>Dirección</h4>
+              <p>La Habana, Cuba</p>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <i class="fas fa-clock"></i>
+            <div>
+              <h4>Horario</h4>
+              <p>Todos los días: 7:00 AM - 10:00 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form animate-right" id="contactForm">
+          <input type="hidden" id="tracking">
+          <div style="position:absolute;left:-9999px" aria-hidden="true">
+            <input type="text" name="_gotcha" id="honeypot" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+          </div>
+
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="+53 53216445">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" maxlength="100">
+          </div>
+
+          <div class="form-group">
+            <label for="servicio">Servicio de interés</label>
+            <div class="custom-select">
+              <select id="servicio" name="servicio">
+                <option value="">Selecciona un servicio</option>
+                <option value="carga-general">Carga General</option>
+                <option value="refrigerado">Refrigerado</option>
+                <option value="carga-pesada">Carga Pesada</option>
+                <option value="distribucion-local">Distribución Local</option>
+                <option value="transporte-nacional">Transporte Nacional</option>
+                <option value="otro">Otro</option>
+              </select>
+              <div class="custom-select-trigger">
+                <span class="custom-select-text">Selecciona un servicio</span>
+                <i class="fas fa-chevron-right custom-select-arrow"></i>
+              </div>
+              <div class="custom-select-options">
+                <div class="custom-select-option selected" data-value="">Selecciona un servicio</div>
+                <div class="custom-select-option" data-value="carga-general">Carga General</div>
+                <div class="custom-select-option" data-value="refrigerado">Refrigerado</div>
+                <div class="custom-select-option" data-value="carga-pesada">Carga Pesada</div>
+                <div class="custom-select-option" data-value="distribucion-local">Distribución Local</div>
+                <div class="custom-select-option" data-value="transporte-nacional">Transporte Nacional</div>
+                <div class="custom-select-option" data-value="otro">Otro</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="destino">Destino (provincia)</label>
+            <div class="custom-select">
+              <select id="destino" name="destino" required>
+                <option value="">Selecciona</option>
+              </select>
+              <div class="custom-select-trigger">
+                <span class="custom-select-text">Selecciona</span>
+                <i class="fas fa-chevron-right custom-select-arrow"></i>
+              </div>
+              <div class="custom-select-options">
+                <div class="custom-select-option selected" data-value="">Selecciona</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="direccion">Dirección de entrega</label>
+            <input type="text" id="direccion" name="direccion" placeholder="Calle, #, reparto" required>
+          </div>
+
+          <div class="form-group">
+            <label for="ciudad">Ciudad / Pueblo</label>
+            <input type="text" id="ciudad" name="ciudad" placeholder="Ej: La Habana, Santa Clara..." required>
+          </div>
+
+          <div class="form-group">
+            <label for="mercancia">Mercancía a transportar</label>
+            <input type="text" id="mercancia" name="mercancia" placeholder="Describe brevemente la carga">
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; text-align: center; cursor: pointer;">Solicitar Cotización</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3 class="footer-logo-text">Tropicales JW</h3>
+          <p>Tu carga, nuestra responsabilidad.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Enlaces</h4>
+          <ul>
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="flota.html">Flota</a></li>
+            <li><a href="../rastreo.html">Rastrear</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contacto</h4>
+          <p><i class="fas fa-phone"></i> <a href="tel:+5353216445">+53 53216445</a></p>
+          <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/5353216445" target="_blank">+53 53216445</a></p>
+
+          <p><i class="fas fa-map-marker-alt"></i> La Habana, Cuba</p>
+        </div>
+        <div class="footer-social">
+          <h4>Síguenos</h4>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/share/1993zUESSt/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tropicales JW. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toastConfirm">
+    <i class="fas fa-check-circle toast-icon"></i>
+    <div class="toast-content">
+      <p>Te confirmaremos el pedido pronto por correo.</p>
+      <p><strong>Si no recibes confirmación en 2 horas</strong>, llámanos a soporte:</p>
+      <div class="toast-phones">
+        <a href="tel:+5353216445"><i class="fas fa-phone"></i> +53 53216445</a>
+        <a href="tel:+5351457401"><i class="fas fa-phone"></i> +53 51457401</a>
+      </div>
+    </div>
+      <button class="toast-close" id="toastClose">&times;</button>
+  </div>
+
+  <script src="../js/tracking.js"></script>
+  <!-- theme.js eliminado: solo modo oscuro fijo -->
+  <script src="../js/script.js"></script>
+</body>
+</html>

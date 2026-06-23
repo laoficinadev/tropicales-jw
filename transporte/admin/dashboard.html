@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="color-scheme" content="light dark">
+  <title>Tropicales JW | Panel Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data:; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://worldtimeapi.org; frame-ancestors 'none'; form-action 'self'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- theme.js eliminado: solo modo oscuro fijo -->
+  <script src="../js/tracking.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #070707;
+      min-height: 100dvh;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .admin-header {
+      background: #000;
+      color: #fff;
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .admin-header h1 { font-size: 1.3rem; font-weight: 600; }
+    .admin-header h1 i { color: #C4942E; margin-right: 10px; }
+    .admin-user { display: flex; align-items: center; gap: 15px; font-size: 0.9rem; }
+    .admin-user i { font-size: 1.3rem; color: #C4942E; }
+    .btn-logout {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: 0.3s ease;
+    }
+    .btn-logout:hover { background: rgba(255,255,255,0.1); }
+    .admin-body { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+    .tab {
+      padding: 10px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.3s ease;
+      background: #0D0D0D;
+      color: #A0A0A0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .tab:hover { background: #1A1A1A; }
+    .tab.active { background: #C4942E; color: #000; }
+    .tab i { margin-right: 6px; }
+    .card {
+      background: #0D0D0D;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      margin-bottom: 20px;
+    }
+    .card h2 { color: #F1F5F9; font-size: 1.2rem; margin-bottom: 15px; }
+    .card h2 i { color: #C4942E; margin-right: 8px; }
+    .empty {
+      text-align: center;
+      color: #A0A0A0;
+      padding: 40px 0;
+    }
+    .empty i { color: #444; }
+
+    /* Tarjetas de pedidos */
+    .pedido-card {
+      background: #0A0A0A;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      border: 1px solid #1A1A1A;
+      transition: 0.2s;
+    }
+    .pedido-card:hover { border-color: #C4942E; }
+    .pedido-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .pedido-tracking {
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #F1F5F9;
+    }
+    .pedido-fecha {
+      font-size: 0.75rem;
+      color: #A0A0A0;
+    }
+    .pedido-card-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 20px;
+      font-size: 0.85rem;
+    }
+    .pedido-field {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .pedido-field .label {
+      font-size: 0.65rem;
+      color: #A0A0A0;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .pedido-field .value {
+      color: #F1F5F9;
+      font-weight: 500;
+    }
+    .pedido-card-actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-pendiente { background: #2A0A0A; color: #E74C3C; }
+    .badge-atendido { background: #0A1A10; color: #2ECC71; }
+    .btn-sm {
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 500;
+      transition: 0.3s ease;
+    }
+    .btn-atender {
+      background: #C4942E;
+      color: #000;
+    }
+    .btn-atender:hover { background: #9D6C20; }
+    .btn-eliminar {
+      background: #2A0A0A;
+      color: #E74C3C;
+    }
+    .btn-eliminar:hover { background: #3A0A0A; }
+
+    /* Formulario registro manual */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .form-grid .full { grid-column: 1 / -1; }
+    .form-grid label {
+      display: block;
+      font-weight: 600;
+      color: #F1F5F9;
+      margin-bottom: 5px;
+      font-size: 0.85rem;
+    }
+    .form-grid input, .form-grid select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #2A2A2A;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      transition: 0.3s ease;
+      outline: none;
+      background: #111;
+      color: #F1F5F9;
+    }
+    .form-grid input:focus, .form-grid select:focus {
+      border-color: #C4942E;
+      box-shadow: 0 0 0 3px rgba(196,148,46,0.2);
+    }
+    .btn-primary {
+      background: #C4942E;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .btn-primary:hover { background: #9D6C20; transform: translateY(-1px); }
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .contador {
+      font-size: 0.85rem;
+      color: #A0A0A0;
+    }
+    @media (max-width: 768px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .admin-header { flex-direction: column; text-align: center; gap: 8px; }
+      .admin-header h1 { font-size: 1.1rem; }
+      .admin-body { margin: 15px auto; padding: 0 12px; }
+      .card { padding: 15px; }
+      .tabs { gap: 6px; }
+      .tab { padding: 8px 14px; font-size: 0.8rem; }
+      .pedido-card-body { grid-template-columns: 1fr; gap: 4px 0; }
+      .btn-sm { padding: 4px 8px; font-size: 0.75rem; }
+    }
+
+    /* NOTA: @media (prefers-color-scheme: dark) y html.dark eliminados.
+       El sitio usa solo tema oscuro fijo con paleta tropical. */
+  </style>
+</head>
+<body>
+  <script>
+    var adminUser = sessionStorage.getItem('admin_user');
+    if (!adminUser) {
+      try { window.location.href = 'index.html'; } catch(e) {}
+    }
+  </script>
+
+  <header class="admin-header">
+    <h1><i class="fas fa-shield-alt"></i> Tropicales JW - Panel Admin</h1>
+    <div class="admin-user">
+      <!-- dark-toggle eliminado: solo modo oscuro fijo -->
+      <i class="fas fa-user-circle"></i>
+      <span id="usernameDisplay"></span>
+      <button class="btn-logout" id="btnLogout">
+        <i class="fas fa-sign-out-alt"></i> Salir
+      </button>
+    </div>
+  </header>
+
+  <div class="admin-body">
+    <div class="tabs">
+      <button class="tab active" id="tabPedidosBtn"><i class="fas fa-list"></i> Pedidos</button>
+      <button class="tab" id="tabRegistrarBtn"><i class="fas fa-plus-circle"></i> Registrar Pedido</button>
+    </div>
+
+    <div id="tabPedidos" class="tab-content">
+      <div class="card">
+        <div class="section-title">
+          <h2><i class="fas fa-truck"></i> Pedidos recibidos</h2>
+          <span class="contador" id="contador">0 pedidos</span>
+        </div>
+        <div id="ordersContainer">
+          <div class="empty">
+            <i class="fas fa-inbox"></i>
+            <p>No hay pedidos registrados</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tabRegistrar" class="tab-content" style="display:none">
+      <div class="card">
+        <h2><i class="fas fa-pen"></i> Registrar pedido por teléfono</h2>
+        <p style="color:#A0A0A0; margin-bottom:20px;">Usa este formulario cuando un cliente llame para hacer un pedido.</p>
+        <form id="manualForm">
+          <input type="hidden" id="mTracking">
+          <div class="form-grid">
+            <div>
+              <label for="mNombre">Nombre</label>
+              <input type="text" id="mNombre" required>
+            </div>
+            <div>
+              <label for="mTelefono">Teléfono</label>
+              <input type="text" id="mTelefono" required>
+            </div>
+            <div>
+              <label for="mEmail">Correo electrónico</label>
+              <input type="email" id="mEmail" maxlength="100">
+            </div>
+            <div>
+              <label for="mOrigen">Origen (provincia)</label>
+              <select id="mOrigen" required>
+                <option value="">Selecciona</option>
+              </select>
+            </div>
+            <div>
+              <label for="mDestino">Destino (provincia)</label>
+              <select id="mDestino" required>
+                <option value="">Selecciona</option>
+              </select>
+            </div>
+            <div>
+              <label for="mDireccion">Dirección de entrega</label>
+              <input type="text" id="mDireccion" required>
+            </div>
+            <div>
+              <label for="mCiudad">Ciudad / Pueblo</label>
+              <input type="text" id="mCiudad" required>
+            </div>
+            <div>
+              <label for="mServicio">Servicio</label>
+              <select id="mServicio">
+                <option value="Carga General">Carga General</option>
+                <option value="Refrigerado">Refrigerado</option>
+                <option value="Carga Pesada">Carga Pesada</option>
+                <option value="Distribución Local">Distribución Local</option>
+                <option value="Transporte Nacional">Transporte Nacional</option>
+                <option value="Almacenaje">Almacenaje</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+            <div>
+              <label for="mMercancia">Mercancía</label>
+              <input type="text" id="mMercancia">
+            </div>
+          </div>
+          <button type="submit" class="btn-primary" style="margin-top:15px;">
+            <i class="fas fa-save"></i> Guardar Pedido
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const user = typeof adminUser !== 'undefined' ? adminUser : sessionStorage.getItem('admin_user');
+    document.getElementById('usernameDisplay').textContent = user;
+
+    function cargarProvincias() {
+      const provincias = ['Pinar del Río','Artemisa','La Habana','Mayabeque','Matanzas','Cienfuegos','Villa Clara','Sancti Spíritus','Ciego de Ávila','Camagüey','Las Tunas','Holguín','Granma','Santiago de Cuba','Guantánamo'];
+      ['mOrigen','mDestino'].forEach(id => {
+        const sel = document.getElementById(id);
+        provincias.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = p; opt.textContent = p;
+          sel.appendChild(opt);
+        });
+      });
+    }
+    cargarProvincias();
+
+    function getPedidos() {
+      return JSON.parse(localStorage.getItem('scorp_pedidos') || '[]');
+    }
+
+    function savePedidos(pedidos) {
+      localStorage.setItem('scorp_pedidos', JSON.stringify(pedidos));
+    }
+
+    function formatFecha(fecha) {
+      if (!fecha || fecha === 'Cargando...') return fecha;
+      try {
+        const d = new Date(fecha);
+        return d.toLocaleDateString('es-CU', {
+          day: '2-digit', month: '2-digit', year: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        });
+      } catch { return fecha; }
+    }
+
+    function renderPedidos() {
+      var container = document.getElementById('ordersContainer');
+      var contador = document.getElementById('contador');
+      var pedidos = getPedidos();
+
+      contador.textContent = pedidos.length + ' pedido' + (pedidos.length !== 1 ? 's' : '');
+
+      if (pedidos.length === 0) {
+        container.innerHTML = '<div class="empty"><i class="fas fa-inbox"></i><p>No hay pedidos registrados</p></div>';
+        return;
+      }
+
+      var html = pedidos.slice().reverse().map(function(p) {
+        var badge = p.estado === 'Atendido'
+          ? '<span class="badge badge-atendido">Atendido</span>'
+          : '<span class="badge badge-pendiente">Pendiente</span>';
+        var ruta = sanitize(p.origen) + ' <i class="fas fa-arrow-right" style="color:#C4942E;font-size:0.6rem"></i> ' + sanitize(p.destino);
+        var acciones = '<div class="pedido-card-actions">'
+          + badge + ' '
+          + (p.estado !== 'Atendido'
+              ? '<button class="btn-sm btn-atender" data-id="' + p.id + '"><i class="fas fa-check"></i> Atender</button> '
+              : '')
+          + '<button class="btn-sm btn-eliminar" data-id="' + p.id + '"><i class="fas fa-trash"></i></button>'
+          + '</div>';
+        return '<div class="pedido-card">'
+          + '<div class="pedido-card-top">'
+          + '<span class="pedido-tracking">' + sanitize(p.tracking) + '</span>'
+          + '<span class="pedido-fecha">' + formatFecha(p.fecha) + '</span>'
+          + '</div>'
+          + '<div class="pedido-card-body">'
+          + '<div class="pedido-field"><span class="label">Cliente</span><span class="value">' + sanitize(p.nombre) + '</span></div>'
+          + '<div class="pedido-field"><span class="label">Teléfono</span><span class="value">' + sanitize(p.telefono) + '</span></div>'
+          + '<div class="pedido-field"><span class="label">Email</span><span class="value">' + sanitize(p.email || '—') + '</span></div>'
+          + '<div class="pedido-field"><span class="label">Ruta</span><span class="value">' + ruta + '</span></div>'
+          + '<div class="pedido-field"><span class="label">Servicio</span><span class="value">' + sanitize(p.servicio) + '</span></div>'
+          + '<div class="pedido-field"><span class="label">Mercancía</span><span class="value">' + sanitize(p.mercancia || '—') + '</span></div>'
+          + '<div class="pedido-field"><span class="label">Dirección</span><span class="value">' + sanitize(p.direccion) + ', ' + sanitize(p.ciudad) + '</span></div>'
+          + '</div>'
+          + acciones
+          + '</div>';
+      }).join('');
+      container.innerHTML = html;
+    }
+
+    function sanitize(str) {
+      if (!str) return '';
+      var d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    function atender(id) {
+      var pedidos = getPedidos();
+      var p = pedidos.find(function(p) { return p.id === id; });
+      if (p) { p.estado = 'Atendido'; savePedidos(pedidos); renderPedidos(); }
+    }
+
+    function eliminar(id) {
+      if (!confirm('¿Eliminar este pedido?')) return;
+      var pedidos = getPedidos().filter(function(p) { return p.id !== id; });
+      savePedidos(pedidos);
+      renderPedidos();
+    }
+
+    function showTab(name, btn) {
+      document.querySelectorAll('.tab-content').forEach(function(el) { el.style.display = 'none'; });
+      document.querySelectorAll('.tab').forEach(function(el) { el.classList.remove('active'); });
+      document.getElementById('tab' + name.charAt(0).toUpperCase() + name.slice(1)).style.display = 'block';
+      btn.classList.add('active');
+      if (name === 'pedidos') renderPedidos();
+    }
+
+    // Event delegation para tabs, logout y botones dinámicos
+    document.body.addEventListener('click', function(e) {
+      var target = e.target.closest('button');
+      if (!target) return;
+
+      if (target.id === 'tabPedidosBtn') showTab('pedidos', target);
+      else if (target.id === 'tabRegistrarBtn') showTab('registrar', target);
+      else if (target.id === 'btnLogout') { sessionStorage.removeItem('admin_user'); window.location.href = 'index.html'; }
+      else if (target.classList.contains('btn-atender')) { atender(parseInt(target.dataset.id)); }
+      else if (target.classList.contains('btn-eliminar')) { eliminar(parseInt(target.dataset.id)); }
+    });
+
+    // Formulario manual
+    document.getElementById('manualForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var tracking = generarTracking();
+      var pedido = {
+        id: Date.now(),
+        tracking: tracking,
+        nombre: document.getElementById('mNombre').value.trim(),
+        telefono: document.getElementById('mTelefono').value.trim(),
+        email: document.getElementById('mEmail').value.trim() || '',
+        origen: document.getElementById('mOrigen').value,
+        destino: document.getElementById('mDestino').value,
+        direccion: document.getElementById('mDireccion').value.trim(),
+        ciudad: document.getElementById('mCiudad').value.trim(),
+        servicio: document.getElementById('mServicio').value,
+        mercancia: document.getElementById('mMercancia').value.trim(),
+        fecha: 'Cargando...',
+        estado: 'Pendiente'
+      };
+      var pedidos = getPedidos();
+      pedidos.push(pedido);
+      savePedidos(pedidos);
+
+      try {
+        var r = await fetch('https://worldtimeapi.org/api/timezone/America/Havana');
+        var d = await r.json();
+        pedido.fecha = d.datetime;
+      } catch {
+        pedido.fecha = new Date().toLocaleString('es-CU', { timeZone: 'America/Havana' }) + ' (local)';
+      }
+      var saved = getPedidos();
+      var idx = saved.findIndex(function(p) { return p.id === pedido.id; });
+      if (idx !== -1) saved[idx].fecha = pedido.fecha;
+      savePedidos(saved);
+
+      document.getElementById('manualForm').reset();
+      document.getElementById('mTracking').value = '';
+      // Custom toast en vez de alert
+      mostrarToastAdmin('Pedido registrado correctamente', 'Tracking: ' + tracking);
+    });
+
+    function mostrarToastAdmin(titulo, detalle) {
+      var t = document.getElementById('toastAdmin');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'toastAdmin';
+        t.style.cssText = 'position:fixed;bottom:30px;right:30px;background:#000;color:#fff;padding:18px 24px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.5);z-index:9999;max-width:380px;font-family:system-ui,sans-serif;animation:fadeInUp 0.3s ease;';
+        document.body.appendChild(t);
+      }
+      t.innerHTML = '<div style="font-weight:600;margin-bottom:6px">' + sanitize(titulo) + '</div><div style="font-size:0.85rem;opacity:0.85">' + sanitize(detalle) + '</div>';
+      t.style.display = 'block';
+      setTimeout(function() { t.style.display = 'none'; }, 4000);
+    }
+
+    renderPedidos();
+  </script>
+</body>
+</html>

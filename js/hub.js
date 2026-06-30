@@ -1,3 +1,20 @@
+function _hubSanitize(str) {
+  if (typeof sanitize === 'function') return sanitize(str);
+  var el = document.createElement('div');
+  el.textContent = str;
+  return el.textContent;
+}
+
+function _hubCheckRateLimit(formId, ms) {
+  if (typeof _checkRateLimit === 'function') return _checkRateLimit(formId, ms);
+  ms = ms || 5000;
+  var now = Date.now();
+  if (!window._hubFormTs) window._hubFormTs = {};
+  if (window._hubFormTs[formId] && now - window._hubFormTs[formId] < ms) return false;
+  window._hubFormTs[formId] = now;
+  return true;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // ===== Smooth scroll for nav anchor links =====
@@ -37,8 +54,19 @@ document.addEventListener('DOMContentLoaded', () => {
   if (storeForm) {
     storeForm.addEventListener('submit', e => {
       e.preventDefault();
-      const email = document.getElementById('storeEmail').value.trim();
+
+      if (!_hubCheckRateLimit('storeForm')) {
+        alert('Espera unos segundos antes de enviar otro mensaje.');
+        return;
+      }
+
+      const email = _hubSanitize(document.getElementById('storeEmail').value.trim()).slice(0, 100);
       if (!email) return;
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Correo electrónico no válido.');
+        return;
+      }
 
       const btn = storeForm.querySelector('.btn');
       const orig = btn.textContent;
@@ -64,6 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm) {
     contactForm.addEventListener('submit', e => {
       e.preventDefault();
+
+      if (!_hubCheckRateLimit('hubForm')) {
+        alert('Espera unos segundos antes de enviar otro mensaje.');
+        return;
+      }
+
       const btn = contactForm.querySelector('.btn');
       const origText = btn.textContent;
       btn.disabled = true;
